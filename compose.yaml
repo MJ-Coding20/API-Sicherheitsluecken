@@ -1,0 +1,37 @@
+name: example_four
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8004:8080
+    networks:
+      network_example_four:
+        ipv4_address: 192.168.4.2
+  resource:
+    build:
+      context: .
+      dockerfile: DockerfileFileserver
+    ports:
+      - 8014:80
+    networks:
+      network_example_four:
+        ipv4_address: 192.168.4.3
+  secret:
+    build:
+      context: .
+      dockerfile: DockerfileFileserverPrivate
+    ports:
+      - 8024:80
+    networks:
+      network_example_four:
+        ipv4_address: 192.168.4.4
+
+networks:
+  network_example_four:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.4.0/24

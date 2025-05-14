@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop Items</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          background-color: #f7f7f7;
+        }
+
+        .grid {
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .item {
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          overflow: hidden;
+          width: 180px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          text-align: center;
+        }
+
+        .item img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        .item-name {
+          padding: 10px;
+          font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Shop Items</h2>
+<div class="grid" id="itemsGrid"></div>
+
+<script>
+    const imageNames = ['1', '2', '3', '4', '5'];
+    const proxyApi = 'http://192.168.4.2:8080/api/picture?url=';
+
+    const grid = document.getElementById('itemsGrid');
+
+    imageNames.forEach(name => {
+      const imageUrl = `http://192.168.4.3/${name}.jpg`;
+      const proxyUrl = proxyApi + encodeURIComponent(imageUrl);
+
+      const item = document.createElement('div');
+      item.className = 'item';
+
+      const img = document.createElement('img');
+      img.src = proxyUrl;
+      img.alt = name;
+
+      const label = document.createElement('div');
+      label.className = 'item-name';
+      label.textContent = name;
+
+      item.appendChild(img);
+      item.appendChild(label);
+      grid.appendChild(item);
+    });
+</script>
+
+</body>
+</html>

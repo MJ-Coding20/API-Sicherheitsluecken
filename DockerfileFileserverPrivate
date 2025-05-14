@@ -1,0 +1,8 @@
+# Dockerfile
+FROM nginx:alpine
+
+# Statische Dateien in /usr/share/nginx/html servieren
+COPY ./resources/data2 /usr/share/nginx/html
+
+# Nginx-Konfiguration überschreiben
+COPY ./resources/nginx.conf /etc/nginx/nginx.conf

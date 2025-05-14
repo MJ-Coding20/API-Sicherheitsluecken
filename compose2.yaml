@@ -1,0 +1,30 @@
+name: example_five
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8005:443
+      - 8015:8080
+    networks:
+      network_example_five:
+        ipv4_address: 192.168.5.2
+  api_two:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8025:443
+      - 8035:8080
+    networks:
+      network_example_five:
+        ipv4_address: 192.168.5.3
+
+networks:
+  network_example_five:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.5.0/24

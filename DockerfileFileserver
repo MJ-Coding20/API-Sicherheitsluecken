@@ -1,0 +1,5 @@
+# Dockerfile
+FROM nginx:alpine
+
+# Statische Dateien in /usr/share/nginx/html servieren
+COPY ./resources/data /usr/share/nginx/html

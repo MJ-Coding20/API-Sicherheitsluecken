@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        .profile {
+            background-color: #e7f7e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: left;
+            color: #333;
+        }
+
+        .profile p {
+            margin: 10px 0;
+        }
+
+        .profile span {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Profile Information</h1>
+    <button onclick="fetchProfile()">Get Profile</button>
+
+    <div id="profile" class="profile" style="display:none;">
+        <p><span>Name:</span> <span id="name"></span></p>
+        <p><span>Surname:</span> <span id="surname"></span></p>
+        <p><span>Birthdate:</span> <span id="birthdate"></span></p>
+    </div>
+</div>
+
+<script>
+    // Function to fetch profile information
+    function fetchProfile() {
+        fetch("http://localhost:"+window.location.port+"/api/profile?id=7")
+            .then(response => response.json())
+            .then(data => {
+                // Show the profile information
+                document.getElementById('name').innerText = data.name;
+                document.getElementById('surname').innerText = data.surname;
+                document.getElementById('birthdate').innerText = data.birthdate;
+
+                // Display the profile section
+                document.getElementById('profile').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching profile:', error);
+                alert('An error occurred while fetching profile data.');
+            });
+    }
+</script>
+
+</body>
+</html>

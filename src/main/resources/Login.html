@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+</head>
+<body>
+<h2>Login</h2>
+<form id="login-form">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+
+    <input type="submit" value="Login">
+</form>
+
+<p id="response-message"></p>
+
+<script>
+    document.getElementById("login-form").addEventListener("submit", async function(e) {
+        e.preventDefault();  // Prevent the form from submitting normally
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            const response = await fetch("http://localhost:"+window.location.port+"/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                document.getElementById("response-message").innerText = "Login successful!";
+            } else {
+                document.getElementById("response-message").innerText = "Login failed.";
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            document.getElementById("response-message").innerText = "An error occurred.";
+        }
+    });
+</script>
+</body>
+</html>
