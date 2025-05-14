@@ -81,4 +81,7 @@ you need some network surveillance program - I used wireshark
   - Start you network surveillance tool
     - I recommend wireshark
     - Select the correct bridge
+  - initiate api-call
+  - see how the first api-call you watch in your network tab in your browser is encrypted, but a second call to an additional api is unencrypted
+  - details in the second call enclose sensitive information
 
